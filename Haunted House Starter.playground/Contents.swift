@@ -23,17 +23,31 @@ let correctOptions = [true, false, false, true]
 //This going the responsible for the nexr scenario's message
 func nextChoice() {
     
+    currentStoryIndex += 1
+    
+    if currentStoryIndex == scenarios.count {
+        
+        gameWon()
+        
+        return
+    }
+    
+    let scenarioMessage = scenarios[currentStoryIndex]
+    
+    let correctOption = correctOptions[currentStoryIndex]
+    
+    showOption(message: scenarioMessage, correctOption: correctOption)
 }
 
 //
 func gameWon(){
-    
+    showAlert(title: "You won!", message: "You become friends with the spirit.")
 }
 
 //
 func gameOver()
 {
-    
+    showAlert(title: "You lose", message: "You make the wrong decision")
 }
 
 
@@ -64,12 +78,12 @@ func showOption(message: String, correctOption: Bool) {
         
         if correctOption == true {
             
-            //nextChoice()
+            nextChoice()
             
         }
         else {
             
-            //gameOver()
+            gameOver()
             
         }
         
@@ -81,12 +95,12 @@ func showOption(message: String, correctOption: Bool) {
         
         if correctOption == false {
             
-            //nextChoice()
+            nextChoice()
             
         }
         else {
             
-            //gameOver()
+            gameOver()
             
         }
         
@@ -99,7 +113,9 @@ func showOption(message: String, correctOption: Bool) {
     v.present(alert, animated: true, completion: nil)
     
 }
-
 let scenarioMessage = scenarios[currentStoryIndex]
 
 let correctOption = correctOptions[currentStoryIndex]
+
+showOption(message: scenarioMessage, correctOption: correctOption)
+
